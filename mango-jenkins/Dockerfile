@@ -11,6 +11,7 @@ ARG WORKSPACE
 WORKDIR /home
 
 # Install make and pip/python dependencies
+# libappindicator3-1: missing library required for chrome
 # uuid-runtime: for unique identifiers used in conda envs
 RUN apt-get update && apt-get install -y \
   git \
@@ -20,10 +21,14 @@ RUN apt-get update && apt-get install -y \
   nodejs \
   uuid-runtime \
   python-tk \
-  chromium
+  libappindicator3-1
+
+# install chrome
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
 
 # set chromium environment variable for mango-pileup karma tests
-ENV CHROME_BIN=/usr/bin/chromium
+ENV CHROME_BIN=/usr/bin/google-chrome-stable
 
 # install node/npm
 RUN conda install -y nodejs
