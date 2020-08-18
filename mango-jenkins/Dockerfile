@@ -10,6 +10,10 @@ ARG WORKSPACE
 
 WORKDIR /home
 
+# add group and user for jenkins
+RUN groupadd jenkins
+RUN useradd -ms /bin/bash jenkins -g jenkins
+
 # Install make and pip/python dependencies
 # libappindicator3-1: missing library required for chrome
 # uuid-runtime: for unique identifiers used in conda envs

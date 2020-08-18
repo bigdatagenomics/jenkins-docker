@@ -24,6 +24,7 @@ docker run -v $WORKSPACE:${WORKSPACE} \
 	-e WORKSPACE=${WORKSPACE} \
 	-e SPARK_VERSION=${SPARK_VERSION} \
 	-e HADOOP_VERSION=${HADOOP_VERSION} \
+	--user jenkins:jenkins \
 	-e SCALAVER=${SCALAVER} \
 	--entrypoint=${WORKSPACE}/scripts/jenkins-test \
 	bigdatagenomics/mango-jenkins:latest
