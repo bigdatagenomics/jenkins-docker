@@ -15,17 +15,20 @@ RUN groupadd jenkins
 RUN useradd -ms /bin/bash jenkins -g jenkins
 
 # Install make and pip/python dependencies
-# libappindicator3-1: missing library required for chrome
+# gcc: required for psutil used in python setup.py scripts
 # uuid-runtime: for unique identifiers used in conda envs
+# libappindicator3-1: missing library required for chrome
 RUN apt-get update && apt-get install -y \
   git \
   make \
-  python3.5 \
-  python3-pip \
-  nodejs \
+  gcc \
   uuid-runtime \
-  python-tk \
   libappindicator3-1
+
+#  python3.5 \
+#  python3-pip \
+#  nodejs \
+#  python-tk \
 
 # install chrome
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
